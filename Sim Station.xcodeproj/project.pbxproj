@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		58B7154D2E709E9700053ECD /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 58B7154C2E709E9700053ECD /* Collections */; };
+		58B715502E709EC400053ECD /* LoadableValues in Frameworks */ = {isa = PBXBuildFile; productRef = 58B7154F2E709EC400053ECD /* LoadableValues */; };
+		58B715522E709EC400053ECD /* SSM in Frameworks */ = {isa = PBXBuildFile; productRef = 58B715512E709EC400053ECD /* SSM */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		58B7152F2E709E7300053ECD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58B715522E709EC400053ECD /* SSM in Frameworks */,
+				58B715502E709EC400053ECD /* LoadableValues in Frameworks */,
+				58B7154D2E709E9700053ECD /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +121,9 @@
 			);
 			name = "Sim Station";
 			packageProductDependencies = (
+				58B7154C2E709E9700053ECD /* Collections */,
+				58B7154F2E709EC400053ECD /* LoadableValues */,
+				58B715512E709EC400053ECD /* SSM */,
 			);
 			productName = "Sim Station";
 			productReference = 58B715202E709E7200053ECD /* Sim Station.app */;
@@ -195,6 +207,10 @@
 			);
 			mainGroup = 58B715172E709E7200053ECD;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				58B7154B2E709E9700053ECD /* XCRemoteSwiftPackageReference "swift-collections" */,
+				58B7154E2E709EC400053ECD /* XCRemoteSwiftPackageReference "SSM" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 58B715212E709E7200053ECD /* Products */;
 			projectDirPath = "";
@@ -551,6 +567,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		58B7154B2E709E9700053ECD /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+		58B7154E2E709EC400053ECD /* XCRemoteSwiftPackageReference "SSM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:JohnDemirci/SSM.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		58B7154C2E709E9700053ECD /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58B7154B2E709E9700053ECD /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		58B7154F2E709EC400053ECD /* LoadableValues */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58B7154E2E709EC400053ECD /* XCRemoteSwiftPackageReference "SSM" */;
+			productName = LoadableValues;
+		};
+		58B715512E709EC400053ECD /* SSM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58B7154E2E709EC400053ECD /* XCRemoteSwiftPackageReference "SSM" */;
+			productName = SSM;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 58B715182E709E7200053ECD /* Project object */;
 }

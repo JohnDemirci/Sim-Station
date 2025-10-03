@@ -1,0 +1,33 @@
+{
+  "originHash" : "3ba991c6917333eaa2bb9820ad58b52cc519e7ff5691744432e656e93e027406",
+  "pins" : [
+    {
+      "identity" : "ssm",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:JohnDemirci/SSM.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "0677e5b6a03e694fb3ed667fc14604c2a50a462e"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "8c0c0a8b49e080e54e5e328cc552821ff07cd341",
+        "version" : "1.2.1"
+      }
+    },
+    {
+      "identity" : "xctest-dynamic-overlay",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
+      "state" : {
+        "revision" : "b2ed9eabefe56202ee4939dd9fc46b6241c88317",
+        "version" : "1.6.1"
+      }
+    }
+  ],
+  "version" : 3
+}
