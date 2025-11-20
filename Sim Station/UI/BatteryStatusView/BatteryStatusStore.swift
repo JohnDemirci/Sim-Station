@@ -30,9 +30,9 @@ struct BatteryStatusReducer: Reducer {
 		case updateState(BatteryChargeState)
 	}
 
-	struct Environment {
-		let retrieveBatteryStateCommand: (Simulator.ID) -> RetrieveBatteryStateCommand
-		let setNewBatteryStateCommand: (Simulator.ID, BatteryState) -> SetNewBatteryStateCommand
+    struct Environment: Sendable {
+		let retrieveBatteryStateCommand: @Sendable (Simulator.ID) -> RetrieveBatteryStateCommand
+		let setNewBatteryStateCommand: @Sendable (Simulator.ID, BatteryState) -> SetNewBatteryStateCommand
 	}
 
 	func reduce(store: Store<BatteryStatusReducer>, request: Request) async {
@@ -116,3 +116,6 @@ extension StoreContrainer where Environment == AppEnvironment {
 }
 
 typealias BatteryStatusStore = Store<BatteryStatusReducer>
+extension KeyPath: @retroactive @unchecked Sendable where Root: Sendable, Value: Sendable {
+    
+}

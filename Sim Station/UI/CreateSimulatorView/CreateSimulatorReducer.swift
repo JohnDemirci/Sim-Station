@@ -29,8 +29,8 @@ struct CreateSimulatorReducer: Reducer {
 		case selectRuntime(SimulatorRuntime)
 	}
 
-	struct Environment {
-		let createSimulatorCommand: (CreateSimulatorCommand.Parameters) -> CreateSimulatorCommand
+    struct Environment: Sendable {
+		let createSimulatorCommand: @Sendable (CreateSimulatorCommand.Parameters) -> CreateSimulatorCommand
 		let retrieveRuntimesCommand: RetrieveSimulatorRuntimesCommand
 	}
 

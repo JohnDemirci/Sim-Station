@@ -15,8 +15,8 @@ struct InstalledApplicationsReducer: Reducer {
 		var applications: LoadableValue<[Simulator.Application], Error> = .idle
 	}
 
-	struct Environment {
-		let retrieveInstalledApplicationsCommand: (Simulator.ID) -> RetrieveInstalledApplicationsCommand
+    struct Environment: Sendable {
+		let retrieveInstalledApplicationsCommand: @Sendable (Simulator.ID) -> RetrieveInstalledApplicationsCommand
 		let workspace: NSWorkspace
 	}
 

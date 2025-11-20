@@ -5,6 +5,7 @@
 //  Created by John Demirci on 9/9/25.
 //
 
+import Combine
 import OrderedCollections
 import SSM
 import SwiftUI
@@ -30,9 +31,6 @@ struct SimulatorListLoadableView: View {
 			},
 			loadingView: { ProgressView() }
 		)
-		.onAppear {
-			simulatorStore.send(.retrieveSimulators)
-		}
 	}
 }
 
@@ -46,6 +44,7 @@ private struct OSMenuListView: View {
 				Text(key.name)
 					.font(.title3)
 			}
+            .padding()
 		}
 	}
 }
@@ -76,20 +75,21 @@ private struct SimulatorListMenuViewView: View {
 	}
 
 	func simulatorNameAttributedString(_ simulator: Simulator) -> AttributedString {
-		let initial = AttributedString(simulator.name ?? "")
-		let status: AttributedString = switch simulator.state {
+		let simulatorName = AttributedString(simulator.name ?? "")
+		let simulatorStatus: AttributedString = switch simulator.state {
 		case .booted:
 			AttributedString("🟢")
 		case .shutdown, .none:
 			AttributedString("⚪️")
 		}
 
-		return status + " " + initial
+		return simulatorStatus + " " + simulatorName
 	}
 }
 
 private struct SimulatorStateToggleView: View {
 	let simulator: Simulator
+    
 	var body: some View {
 		switch simulator.state {
 		case .booted:

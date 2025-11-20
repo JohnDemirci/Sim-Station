@@ -8,18 +8,18 @@
 import SSM
 import SwiftUI
 
-struct AppEnvironment {
-	let createSimulatorCommand: (CreateSimulatorCommand.Parameters) -> CreateSimulatorCommand
+struct AppEnvironment: Sendable {
+	let createSimulatorCommand: @Sendable (CreateSimulatorCommand.Parameters) -> CreateSimulatorCommand
 	let broadcast: BroadcastStudio
-	let deleteSimulatorCommand: (Simulator.ID) -> DeleteSimulatorShellCommand
-	let openSimulatorCommand: (Simulator.ID) -> OpenSimulatorShellCommand
-	let retrieveActiveProcessesCommand: (Simulator.ID) -> RetrieveActiveProcessesShellCommand
-	let retrieveBatteryStateCommand: (Simulator.ID) -> RetrieveBatteryStateCommand
-	let retrieveInstalledApplicationsCommand: (Simulator.ID) -> RetrieveInstalledApplicationsCommand
+	let deleteSimulatorCommand: @Sendable (Simulator.ID) -> DeleteSimulatorShellCommand
+	let openSimulatorCommand: @Sendable (Simulator.ID) -> OpenSimulatorShellCommand
+	let retrieveActiveProcessesCommand: @Sendable (Simulator.ID) -> RetrieveActiveProcessesShellCommand
+	let retrieveBatteryStateCommand: @Sendable (Simulator.ID) -> RetrieveBatteryStateCommand
+	let retrieveInstalledApplicationsCommand: @Sendable (Simulator.ID) -> RetrieveInstalledApplicationsCommand
 	let retrieveSimulatorCommand: RetrieveSimulatorsCommand
 	let retrieveSimulatorRuntimesCommand: RetrieveSimulatorRuntimesCommand
-	let setNewBatteryStateCommand: (Simulator.ID, BatteryState) -> SetNewBatteryStateCommand
-	let shutdownSimulatorCommand: (Simulator.ID) -> ShutdownSimulatorShellCommand
+	let setNewBatteryStateCommand: @Sendable (Simulator.ID, BatteryState) -> SetNewBatteryStateCommand
+	let shutdownSimulatorCommand: @Sendable (Simulator.ID) -> ShutdownSimulatorShellCommand
 	let workspace: NSWorkspace
 
 	init() {
@@ -37,3 +37,5 @@ struct AppEnvironment {
 		self.workspace = .shared
 	}
 }
+
+extension NSWorkspace: @unchecked @retroactive Sendable {}

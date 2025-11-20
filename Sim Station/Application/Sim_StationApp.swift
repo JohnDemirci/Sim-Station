@@ -27,6 +27,7 @@ struct Sim_StationApp: App {
 				.environment(container)
 				.environment(globalStore)
 		}
+        .menuBarExtraStyle(.window)
 
 		Group {
 			ActiveProcessesScene()

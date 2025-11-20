@@ -18,10 +18,10 @@ struct ActiveProcessesReducer: Reducer {
 	}
 
 	struct Environment {
-		let retrieveActiveProcessesCommand: (Simulator.ID) -> RetrieveActiveProcessesShellCommand
+		let retrieveActiveProcessesCommand: @Sendable (Simulator.ID) -> RetrieveActiveProcessesShellCommand
 	}
 
-	func reduce(store: Store<ActiveProcessesReducer>, request: Request) async {
+    func reduce(store: Store<Self>, request: Request) async {
 		switch request {
 		case .retrieveProcesses:
 			await load(store: store,keyPath: \.processes) {

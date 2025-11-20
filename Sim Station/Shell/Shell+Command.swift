@@ -8,7 +8,7 @@
 import Foundation
 import OrderedCollections
 
-protocol ShellCommand {
+protocol ShellCommand: Sendable {
     associatedtype Result
     var path: ShellCommandPath { get }
     var tokens: [ShellCommandToken] { get }

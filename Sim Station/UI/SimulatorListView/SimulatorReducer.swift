@@ -8,11 +8,8 @@
 import Combine
 import OrderedCollections
 import SSM
-import Foundation
 import AppKit
 
-
-extension NotificationCenter: @unchecked Sendable {}
 extension NSNotification: @unchecked @retroactive Sendable {}
 extension Notification: @unchecked @retroactive Sendable {}
 
@@ -29,13 +26,13 @@ struct SimulatorReducer: Reducer {
 		case updateSimulatorState(Simulator, Simulator.State)
 	}
 
-	struct Environment {
+    struct Environment: Sendable {
 		let broadcastStudio: BroadcastStudio
 		let notificationCenter: NotificationCenter
-		let deleteSimulatorCommand: (Simulator.ID) -> DeleteSimulatorShellCommand
-		let openSimulatorCommand: (Simulator.ID) -> OpenSimulatorShellCommand
+		let deleteSimulatorCommand: @Sendable (Simulator.ID) -> DeleteSimulatorShellCommand
+		let openSimulatorCommand: @Sendable (Simulator.ID) -> OpenSimulatorShellCommand
 		let retrieveSimulatorCommand: RetrieveSimulatorsCommand
-		let shutdownSimulatorCommand: (Simulator.ID) -> ShutdownSimulatorShellCommand
+		let shutdownSimulatorCommand: @Sendable (Simulator.ID) -> ShutdownSimulatorShellCommand
 	}
 
 	func reduce(store: Store<SimulatorReducer>, request: Request) async {

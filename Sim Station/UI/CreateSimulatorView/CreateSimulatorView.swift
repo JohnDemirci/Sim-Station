@@ -31,7 +31,7 @@ struct CreateSimulatorLoadableView: View {
 			createSimulatorStore.send(.retrieveRuntimes)
 		}
 		.onDisappear {
-			globalStore.send(.openCreateSimulator(nil))
+			globalStore.send(.dismissCreateSimulator)
 		}
 	}
 }
