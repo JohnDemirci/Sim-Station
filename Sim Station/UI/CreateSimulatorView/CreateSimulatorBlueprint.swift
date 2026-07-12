@@ -87,12 +87,16 @@ struct CreateSimulatorBlueprint: FeatureBlueprint {
                     sender: featureID
                 )
 
+                context.tab = .success
+
                 return .fireAndForget { dependency in
                     await dependency.broadcaster.broadcast(message: message)
                 }
 
             case .failure(let error):
                 context.creatingSimulator = .failed(LoadingFailure(failure: error, timestamp: .now))
+                context.tab = .failure(error.localizedDescription)
+
                 return .done
             }
 

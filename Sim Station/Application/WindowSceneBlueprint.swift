@@ -10,10 +10,22 @@ import Supervision
 struct WindowSceneBlueprint: FeatureBlueprint {
     @ObservableValue
     struct State {
-        var openActiveProcesses: WindowID<Simulator.ID> = .init(.activeProcesses)
-        var openBatteryStatus: WindowID<Simulator.ID> = .init(.batteryStatus)
-        var openCreateSimulator: WindowID<EquatableVoid> = .init(.createSimulator)
-        var openSimulatorInformation: WindowID<Simulator> = .init(.simulatorInformation)
+        var openActiveProcesses: WindowID<Simulator.ID>
+        var openBatteryStatus: WindowID<Simulator.ID>
+        var openCreateSimulator: WindowID<EquatableVoid>
+        var openSimulatorInformation: WindowID<Simulator>
+
+        init(
+            openActiveProcesses: WindowID<Simulator.ID> = .init(.activeProcesses),
+            openBatteryStatus: WindowID<Simulator.ID> = .init(.batteryStatus),
+            openCreateSimulator: WindowID<EquatableVoid> = .init(.createSimulator),
+            openSimulatorInformation: WindowID<Simulator> = .init(.simulatorInformation)
+        ) {
+            self.openActiveProcesses = openActiveProcesses
+            self.openBatteryStatus = openBatteryStatus
+            self.openCreateSimulator = openCreateSimulator
+            self.openSimulatorInformation = openSimulatorInformation
+        }
     }
 
     enum Action {

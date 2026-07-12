@@ -26,7 +26,7 @@ struct BatteryStatusBlueprint: FeatureBlueprint {
         var chargeState: BatteryChargeState = .unknown
 
         var batteryState: BatteryState {
-            .init(chargeState: chargeState, batteryLevel: level)
+            BatteryState(chargeState: chargeState, batteryLevel: level)
         }
 
         init(_ id: Simulator.ID) {

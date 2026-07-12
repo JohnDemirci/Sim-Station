@@ -24,6 +24,8 @@ struct SimulatorBlueprint: FeatureBlueprint {
     }
 
     enum Action {
+        case deleteAllSimulators(OS.Name)
+        case deleteAllSimulatorResult([Simulator])
         case deleteSimulator(Simulator)
         case deleteSimulatorResult(Result<Simulator, Error>)
         case retrieveSimulators
@@ -39,8 +41,49 @@ struct SimulatorBlueprint: FeatureBlueprint {
         let shutdownSimulatorCommand: @Sendable (Simulator.ID) -> ShutdownSimulatorShellCommand
     }
 
-    func process(action: Action, context: borrowing Context<State>, featureID: Supervision.ReferenceIdentifier) -> FeatureWork {
+    func process(
+        action: Action,
+        context: borrowing Context<State>,
+        featureID: Supervision.ReferenceIdentifier
+    ) -> FeatureWork {
         switch action {
+        case .deleteAllSimulators(let os):
+            guard let simulators = context.state.simulators.value?[os] else {
+                return .done
+            }
+
+            return .run { dependency in
+                var deletedSimulators: [Simulator] = []
+                for simulator in simulators {
+                    do {
+                        try await dependency.deleteSimulatorCommand(simulator.id).run()
+                        deletedSimulators.append(simulator)
+                    } catch {
+                        continue
+                    }
+                }
+                return deletedSimulators
+            } map: { result in
+                .deleteAllSimulatorResult(try! result.get())
+            }
+
+        case .deleteAllSimulatorResult(let simulators):
+            context.simulators.modify { dictionary in
+                for simulator in simulators {
+                    if let os = simulator.os {
+                        dictionary[os]?.removeAll { sim in
+                            sim.id == simulator.id
+                        }
+
+                        if dictionary[os]?.isEmpty == true {
+                            dictionary[os] = nil
+                        }
+                    }
+                }
+            }
+
+            return .done
+
         case .deleteSimulator(let simulator):
             context.deletingSimulator = .loading
             return .run { dependency in

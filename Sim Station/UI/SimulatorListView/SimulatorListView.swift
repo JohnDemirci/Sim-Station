@@ -5,7 +5,6 @@
 //  Created by John Demirci on 9/9/25.
 //
 
-import Combine
 import OrderedCollections
 import SwiftUI
 import Supervision
@@ -39,13 +38,15 @@ private struct OSMenuListView: View {
 
 	var body: some View {
 		ForEach(simulators.keys) { key in
-			Menu {
-				SimulatorListMenuViewView(simulators: simulators[key] ?? [])
-			} label: {
-				Text(key.name)
-					.font(.title3)
-			}
-            .padding()
+            Section {
+                Menu {
+                    SimulatorListMenuViewView(simulators: simulators[key] ?? [], osName: key)
+                } label: {
+                    Text(key.name)
+                        .font(.title3)
+                }
+                .padding()
+            }
 		}
 	}
 }
@@ -53,7 +54,10 @@ private struct OSMenuListView: View {
 private struct SimulatorListMenuViewView: View {
 	@Environment(Container.self) private var container
 	@Environment(\.openWindow) private var openWindow
+    @Environment(SimulatorFeature.self) private var simulatorFeature
+
 	let simulators: [Simulator]
+    let osName: OS.Name
 
 	var body: some View {
 		ForEach(simulators) { simulator in
@@ -66,23 +70,28 @@ private struct SimulatorListMenuViewView: View {
 				DeleteSimulatorButtonView(simulator: simulator)
 				ModifyBatteryStatusView(simulator: simulator)
 			} label: {
-				Text(simulatorNameAttributedString(simulator))
-					.font(.title3)
+				simulatorNameText(simulator)
 			}
 		}
+
+        Section {
+            Button("Delete All", systemImage: "xmark.bin.fill") {
+                simulatorFeature.send(.deleteAllSimulators(osName))
+            }
+        }
 	}
 
-	func simulatorNameAttributedString(_ simulator: Simulator) -> AttributedString {
-		let simulatorName = AttributedString(simulator.name ?? "")
-		let simulatorStatus: AttributedString = switch simulator.state {
-		case .booted:
-			AttributedString("🟢")
-		case .shutdown, .none:
-			AttributedString("⚪️")
-		}
+    func simulatorNameText(_ simulator: Simulator) -> Text {
+        let (symbolName, color): (String, Color) = switch simulator.state {
+        case .booted:
+            ("circle.fill", .green)
+        case .shutdown, .none:
+            ("circle", .gray)
+        }
 
-		return simulatorStatus + " " + simulatorName
-	}
+        return Text("\(Image(systemName: symbolName)) \(simulator.name ?? "")")
+            .foregroundStyle(color)
+    }
 }
 
 private struct SimulatorStateToggleView: View {
