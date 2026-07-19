@@ -1,6 +1,9 @@
-# Sim Station
+# Sim Train
 
 A macOS menu bar application for managing iOS, watchOS, tvOS, and visionOS simulators. Sim Station provides a convenient interface to interact with Xcode's simulator command-line tools without leaving your menu bar.
+
+<img width="419" height="309" alt="Screenshot 2026-07-19 at 11 43 13 AM" src="https://github.com/user-attachments/assets/672caa18-1ad9-4e1a-844d-ec18f5b1ac7a" />
+<img width="419" height="309" alt="Screenshot 2026-07-19 at 11 43 46 AM" src="https://github.com/user-attachments/assets/2e6d676c-8ba1-4d76-a4ca-369b4a2b1438" />
 
 ## Features
 
@@ -26,7 +29,6 @@ A macOS menu bar application for managing iOS, watchOS, tvOS, and visionOS simul
 - **Battery Status**: Simulate battery levels and charging states
   - Adjust battery level (0-100%)
   - Set charge state (charging, charged, discharging)
-- **Location Updates**: Update simulator location (coming soon)
 
 ### User Experience
 - **Menu Bar Integration**: Always accessible from your menu bar
@@ -35,13 +37,11 @@ A macOS menu bar application for managing iOS, watchOS, tvOS, and visionOS simul
 - **Searchable Interfaces**: Quick filtering in process lists
 - **Loading States**: Clear visual feedback for all async operations
 
-## Requirements
-
-- macOS 13.0 or later
-- Xcode 14.0 or later (for simulator support)
-- Swift 5.9 or later
-
 ## Installation
+
+### Installing from the dmg file
+1. Click the releases button
+2. Downlaod the zip file and install
 
 ### Building from Source
 
@@ -60,121 +60,4 @@ A macOS menu bar application for managing iOS, watchOS, tvOS, and visionOS simul
 
 The app will appear in your menu bar with a train icon.
 
-## Architecture
-
-Sim Station is built using modern Swift and SwiftUI with a clean, modular architecture:
-
-### State Management (SSM Framework)
-- **Redux-like pattern** with Reducers and Stores
-- **Unidirectional data flow** for predictable state updates
-- **LoadableValue** wrapper for tracking async operation states
-- **BroadcastStudio** pub/sub system for cross-feature communication
-
-### Project Structure
-```
-Sim Station/
-├── Application/        # App entry point and global state
-│   ├── Sim_StationApp.swift
-│   ├── GlobalReducer.swift
-│   └── AppEnvironment.swift
-├── Models/             # Domain models
-│   ├── Simulator.swift
-│   ├── OS.swift
-│   ├── SimulatorRuntime.swift
-│   └── BatteryState.swift
-├── Shell/              # Command execution layer
-│   ├── Shell+Command.swift
-│   └── Commands/       # Individual command implementations
-├── UI/                 # SwiftUI views and reducers
-│   ├── MenuBarListView/
-│   ├── SimulatorListView/
-│   ├── CreateSimulatorView/
-│   ├── ActiveProcessesView/
-│   ├── BatteryStatusView/
-│   └── Common/         # Reusable components
-└── Utility/            # Helper utilities
-```
-
-### Key Design Patterns
-- **Protocol-Oriented Design**: `ShellCommand` protocol for all simulator operations
-- **Dependency Injection**: `AppEnvironment` provides testable command factories
-- **Type Safety**: `ShellCommandToken` enum prevents command construction errors
-- **Modern Concurrency**: Async/await throughout, Swift 6 concurrency compliant
-- **Generic Window Management**: Type-safe multi-window coordination
-
-## Usage
-
-### Creating a Simulator
-1. Click the Sim Station icon in your menu bar
-2. Click "Create Simulator"
-3. Follow the wizard:
-   - Select runtime version
-   - Choose device type
-   - Enter a name
-   - Review and confirm
-
-### Managing Simulators
-1. Click the Sim Station icon in your menu bar
-2. Find your simulator in the list (organized by OS)
-3. Click on a simulator to see available actions:
-   - Boot/Shutdown
-   - View Active Processes
-   - Open Documents folder
-   - View Simulator Information
-   - See Installed Applications
-   - Modify Battery Status
-   - Delete
-
-### Simulating Battery States
-1. Right-click a booted simulator
-2. Select "Modify Battery Status"
-3. Adjust battery level and charge state
-4. Changes apply immediately to the simulator
-
-## Development
-
-### Dependencies
-- **SSM**: Custom state management framework
-- **swift-collections**: Apple's OrderedDictionary for maintaining simulator order
-
-### Shell Commands
-The app wraps 14 `simctl` commands:
-- `CreateSimulator`
-- `DeleteSimulator`
-- `EraseContent`
-- `FetchActiveProcesses`
-- `FetchDeviceTypes`
-- `FetchRuntimes`
-- `FetchSimulators`
-- `OpenPath`
-- `OpenSimulator`
-- `RetrieveBatteryState`
-- `RetrieveInstalledApplications`
-- `SetNewBatteryState`
-- `ShutdownSimulator`
-- `UpdateLocation`
-
-Each command implements the `ShellCommand` protocol with proper error handling and type-safe result parsing.
-
-### Adding New Features
-1. Create a new command in `Shell/Commands/` implementing `ShellCommand`
-2. Add the command factory to `AppEnvironment`
-3. Create a reducer in the appropriate UI directory
-4. Build the SwiftUI view
-5. Integrate with `GlobalReducer` if it requires a new window
-
-## Contributing
-
-Contributions are welcome! Please follow these guidelines:
-- Follow Swift API Design Guidelines
-- Maintain the existing architecture patterns
-- Add tests for new shell commands
-- Update this README for new features
-
 ## License
-
-## Acknowledgments
-
-- Built with [SSM](https://github.com/JohnDemirci/SSM) state management framework
-- Uses Apple's `simctl` command-line tools
-- Icons and UI components built with SwiftUI
