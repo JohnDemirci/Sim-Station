@@ -30,7 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		58B715202E709E7200053ECD /* Sim Station.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sim Station.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		58B715202E709E7200053ECD /* Sim Train.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sim Train.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58B7152E2E709E7300053ECD /* Sim StationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sim StationTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58B715382E709E7300053ECD /* Sim StationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Sim StationUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -94,7 +94,7 @@
 		58B715212E709E7200053ECD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				58B715202E709E7200053ECD /* Sim Station.app */,
+				58B715202E709E7200053ECD /* Sim Train.app */,
 				58B7152E2E709E7300053ECD /* Sim StationTests.xctest */,
 				58B715382E709E7300053ECD /* Sim StationUITests.xctest */,
 			);
@@ -126,7 +126,7 @@
 				52A09D7D2FD6237700CEB653 /* LoadableValue */,
 			);
 			productName = "Sim Station";
-			productReference = 58B715202E709E7200053ECD /* Sim Station.app */;
+			productReference = 58B715202E709E7200053ECD /* Sim Train.app */;
 			productType = "com.apple.product-type.application";
 		};
 		58B7152D2E709E7300053ECD /* Sim StationTests */ = {
@@ -433,7 +433,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Demirci.Sim-Station";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Sim Train";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
@@ -463,7 +463,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Demirci.Sim-Station";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Sim Train";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;

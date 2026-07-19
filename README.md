@@ -61,3 +61,11 @@ A macOS menu bar application for managing iOS, watchOS, tvOS, and visionOS simul
 The app will appear in your menu bar with a train icon.
 
 ## License
+
+Sim Station is available under the BSD Zero Clause License. See [LICENSE](LICENSE).
+
+## Acknowledgments
+
+- Built with [SSM](https://github.com/JohnDemirci/SSM) state management framework
+- Uses Apple's `simctl` command-line tools
+- Icons and UI components built with SwiftUI
